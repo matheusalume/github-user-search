@@ -1,0 +1,13 @@
+.main-nav {
+    height: 60px;
+    background: #1890FF;
+    color: #FFF;
+    padding-left: 40px;
+    align-items: center;
+    display: flex;
+}
+
+.nav-title {
+    font-size: 24px;
+    font-weight: 500;
+}
