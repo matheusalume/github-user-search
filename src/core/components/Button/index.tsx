@@ -1,4 +1,3 @@
-import { Link , Redirect} from 'react-router-dom';
 import './styles.css';
 
 type Props = {
