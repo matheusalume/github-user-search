@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import Button from '../../core/components/Button';
-import Form from './Form';
+import { makeRequest } from '../../core/utils/requests';
+import Profile from './Profile';
 import './styles.css';
 
 type Profile = {
@@ -13,53 +15,47 @@ type Profile = {
     created_at: string
 }
 
+type FormState = {
+    username: string;
+}
+
+type FormEvent = React.ChangeEvent<HTMLInputElement>;
+
 const Search = () => {
+    const [formData, setFormData] = useState<FormState>({
+        username: ''
+    });
+
+    const handleOnChange = (event: FormEvent) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setFormData(data => ({ ...data, [name]: value }))
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        makeRequest(formData.username)
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
+    };
+    
     return (
         <div className="search-content">
             <div className ="search-div">
                 <h1 className="search-title">Encontre um perfil Github</h1>   
-                <Form />                  
-            </div>
-            <div className="profile">
-                <div className="profile-content">
-                    <img 
-                        src="https://avatars.githubusercontent.com/u/52417974?s=400&u=b9b8cc2dbc4b8791c2f116340be3ca68060e3b64&v=4" 
-                        alt=""
-                        className="profile-image"
+                <form onSubmit={handleSubmit}>
+                    <input
+                        name="username"
+                        value={formData.username}
+                        onChange={handleOnChange}
+                        className="search-input"
+                        placeholder="Usuário Github"
+                        required
                     />
-                    <div className="profile-info">
-                        <div className="profile-numbers">
-                            <span className="profile-numbers-span">
-                                Repositórios públicos: 62
-                            </span>
-                            <span className="profile-numbers-span">
-                                Seguidores: 127
-                            </span>
-                            <span className="profile-numbers-span">
-                                Seguindo: 416
-                            </span>                            
-                        </div>
-                        <div className="profile-personal-info">
-                            <h1>Informações</h1>
-                            <ul>
-                                <li>
-                                    <b>Empresa:</b> @ZupIT
-                                </li>
-                                <li>
-                                    <b>Website/Blog:</b> https://thewashington.dev
-                                </li>
-                                <li>
-                                    <b>Localidade:</b> Uberlândia
-                                </li>
-                                <li>
-                                    <b>Membro desde:</b> 19/10/2013
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>                
-                <Button label="Ver Perfil" />
+                    <Button label="Encontrar" />
+                </form>                
             </div>
+            <Profile />
         </div>        
     );
 };
