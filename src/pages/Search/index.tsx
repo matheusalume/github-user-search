@@ -2,6 +2,17 @@ import Button from '../../core/components/Button';
 import Form from './Form';
 import './styles.css';
 
+type Profile = {
+    avatar_url: string,
+    public_repos: number,
+    followers: number,
+    following: number,
+    company: string,
+    blog: string,
+    location: string,
+    created_at: string
+}
+
 const Search = () => {
     return (
         <div className="search-content">

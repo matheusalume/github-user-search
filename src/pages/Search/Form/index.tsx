@@ -1,6 +1,7 @@
 import './styles.css';
 import { useState } from 'react';
 import Button from '../../../core/components/Button';
+import { makeRequest } from '../../../core/utils/requests';
 
 type FormState = {
     username: string;
@@ -21,7 +22,9 @@ const Form = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // INSERIR REQUEST A API DO GITHUB
+        makeRequest(formData.username)
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
     };
 
     return (
