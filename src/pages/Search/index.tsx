@@ -1,19 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../core/components/Button';
 import { makeRequest } from '../../core/utils/requests';
 import Profile from './Profile';
 import './styles.css';
-
-type Profile = {
-    avatar_url: string,
-    public_repos: number,
-    followers: number,
-    following: number,
-    company: string,
-    blog: string,
-    location: string,
-    created_at: string
-}
 
 type FormState = {
     username: string;
@@ -22,6 +11,9 @@ type FormState = {
 type FormEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Search = () => {
+    const [user, setUser] = useState();
+    const [notFound, setNotFound] = useState(false);
+    
     const [formData, setFormData] = useState<FormState>({
         username: ''
     });
@@ -29,15 +21,25 @@ const Search = () => {
     const handleOnChange = (event: FormEvent) => {
         const name = event.target.name;
         const value = event.target.value;
-        setFormData(data => ({ ...data, [name]: value }))
+        setFormData(data => ({ ...data, [name]: value }));
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         makeRequest(formData.username)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+            .then(response => {
+                setUser(response.data);
+                setNotFound(false);
+            })
+            .catch(() => {
+                setNotFound(true);
+                setUser(undefined);
+            });
     };
+
+    useEffect(() => {
+        //console.log(user);
+    }, [user]);
     
     return (
         <div className="search-content">
@@ -53,9 +55,10 @@ const Search = () => {
                         required
                     />
                     <Button label="Encontrar" />
+                    {notFound && <span className="not-found">Usuário não encontrado!</span>}
                 </form>                
             </div>
-            <Profile />
+            {user && <Profile />}
         </div>        
     );
 };

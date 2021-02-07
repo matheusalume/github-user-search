@@ -37,3 +37,9 @@
 .search-input:required:invalid {
     box-shadow: none;
 }
+
+.not-found {
+    margin-left: 30px;
+    color: red;
+    font-size: 12px;
+}
