@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../../core/components/Button';
+import { User } from '../../core/types/User';
 import { makeRequest } from '../../core/utils/requests';
 import Profile from './Profile';
 import './styles.css';
@@ -11,7 +12,7 @@ type FormState = {
 type FormEvent = React.ChangeEvent<HTMLInputElement>;
 
 const Search = () => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState<User>();
     const [notFound, setNotFound] = useState(false);
     
     const [formData, setFormData] = useState<FormState>({
@@ -36,10 +37,6 @@ const Search = () => {
                 setUser(undefined);
             });
     };
-
-    useEffect(() => {
-        //console.log(user);
-    }, [user]);
     
     return (
         <div className="search-content">
@@ -58,7 +55,7 @@ const Search = () => {
                     {notFound && <span className="not-found">Usuário não encontrado!</span>}
                 </form>                
             </div>
-            {user && <Profile />}
+            {user && <Profile userData={user}/>}
         </div>        
     );
 };

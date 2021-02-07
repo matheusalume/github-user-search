@@ -1,40 +1,45 @@
 import Button from '../../../core/components/Button';
+import { User } from '../../../core/types/User';
 import './styles.css'
 
-const Profile = () => (
+type Props = {
+    userData: User
+}
+
+const Profile = ({ userData }: Props) => (
     <div className="profile">
         <div className="profile-content">
             <img 
-                src="https://avatars.githubusercontent.com/u/52417974?s=400&u=b9b8cc2dbc4b8791c2f116340be3ca68060e3b64&v=4" 
+                src={userData.avatar_url}
                 alt=""
                 className="profile-image"
             />
             <div className="profile-info">
                 <div className="profile-numbers">
                     <span className="profile-numbers-span">
-                        Repositórios públicos: 62
+                        Repositórios públicos: {userData.public_repos}
                     </span>
                     <span className="profile-numbers-span">
-                        Seguidores: 127
+                        Seguidores: {userData.followers}
                     </span>
                     <span className="profile-numbers-span">
-                        Seguindo: 416
+                        Seguindo: {userData.following}
                     </span>                            
                 </div>
                 <div className="profile-personal-info">
                     <h1>Informações</h1>
                     <ul>
                         <li>
-                            <b>Empresa:</b> @ZupIT
+                            <b>Empresa:</b> {userData.company}
                         </li>
                         <li>
-                            <b>Website/Blog:</b> https://thewashington.dev
+                            <b>Website/Blog:</b> {userData.blog}
                         </li>
                         <li>
-                            <b>Localidade:</b> Uberlândia
+                            <b>Localidade:</b> {userData.location}
                         </li>
                         <li>
-                            <b>Membro desde:</b> 19/10/2013
+                            <b>Membro desde:</b> {userData.created_at}
                         </li>
                     </ul>
                 </div>
