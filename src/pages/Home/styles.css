@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap');
 
 .home-content {
-    padding-top: 120px;
+    padding-top: 117px;
     padding-left: 120px;
     font-family: 'Red Hat Display', sans-serif;
+    margin-bottom: 265px;
 }
 
 .home-title {
@@ -18,7 +19,8 @@
     color: #5A6774;
     width: 612px;
     font-size: 20px;
-    line-height: 36px;        
+    line-height: 36px;    
+    margin-bottom: 48px;    
 }
 
 .home-text-blue {
