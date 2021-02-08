@@ -6,5 +6,8 @@ export type User = {
     company: string,
     blog: string,
     location: string,
-    created_at: string
+    created_at: string,
+
+    name: string,
+    html_url: string
 }

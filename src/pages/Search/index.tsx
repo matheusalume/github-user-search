@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../../core/components/Button';
 import { User } from '../../core/types/User';
 import { makeRequest } from '../../core/utils/requests';
+import Loader from './loaders/Loader';
 import Profile from './Profile';
 import './styles.css';
 
@@ -14,6 +15,7 @@ type FormEvent = React.ChangeEvent<HTMLInputElement>;
 const Search = () => {
     const [user, setUser] = useState<User>();
     const [notFound, setNotFound] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     
     const [formData, setFormData] = useState<FormState>({
         username: ''
@@ -27,6 +29,7 @@ const Search = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setIsLoading(true);
         makeRequest(formData.username)
             .then(response => {
                 setUser(response.data);
@@ -35,6 +38,9 @@ const Search = () => {
             .catch(() => {
                 setNotFound(true);
                 setUser(undefined);
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     };
     
@@ -55,7 +61,9 @@ const Search = () => {
                     {notFound && <span className="not-found">Usuário não encontrado!</span>}
                 </form>                
             </div>
-            {user && <Profile userData={user}/>}
+            {isLoading ? <Loader /> : 
+                user && <Profile userData={user}/>
+            }
         </div>        
     );
 };

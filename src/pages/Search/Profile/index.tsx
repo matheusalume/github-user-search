@@ -11,7 +11,7 @@ const Profile = ({ userData }: Props) => (
         <div className="profile-content">
             <img 
                 src={userData.avatar_url}
-                alt=""
+                alt={userData.name}
                 className="profile-image"
             />
             <div className="profile-info">
@@ -44,8 +44,10 @@ const Profile = ({ userData }: Props) => (
                     </ul>
                 </div>
             </div>
-        </div>                
-        <Button label="Ver Perfil" />
+        </div>
+        <a href={userData.html_url} target="_blank">
+            <Button label="Ver Perfil" />
+        </a>                
     </div>
 );
 
