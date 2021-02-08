@@ -8,8 +8,9 @@ const Home = () => (
             Desafio do Capítulo 3, <br /> Bootcamp DevSuperior
         </h1>
         <div className="home-text">
-            <p>Bem-vindos ao desafio do capítulo 3 do Bootcamp DevSuperior.</p>
-            <p>Favor observar as instruções passadas no capítulo sobre a elaboração deste projeto.</p>            
+            <p>Bem-vindos ao meu desafio do capítulo 3 do Bootcamp DevSuperior</p>
+            <p>Funcionalidades extras: validação do input (preenchimento obrigatório) e tratamento do erro 404 (usuário não encontrado)</p> 
+            <p>Espero que gostem 😄 Feito por <a href="https://www.linkedin.com/in/matheusalume/" className="home-text-blue">@matheusalume</a></p>            
             <p>Este design foi adaptado a partir de Ant Design System for Figma, de Mateusz Wierzbicki: <span className="home-text-blue">antforfigma@gmail.com</span></p>            
         </div>
         <Link to="/search">

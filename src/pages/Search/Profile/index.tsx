@@ -1,6 +1,7 @@
 import Button from '../../../core/components/Button';
 import { User } from '../../../core/types/User';
-import './styles.css'
+import './styles.css';
+import dayjs from 'dayjs';
 
 type Props = {
     userData: User
@@ -39,7 +40,7 @@ const Profile = ({ userData }: Props) => (
                             <b>Localidade:</b> {userData.location}
                         </li>
                         <li>
-                            <b>Membro desde:</b> {userData.created_at}
+                            <b>Membro desde:</b> {dayjs(userData.created_at).format('DD/MM/YYYY')}
                         </li>
                     </ul>
                 </div>
